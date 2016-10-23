@@ -24,7 +24,7 @@ SET /p pass= MySQL Password:
 ECHO.
 SET /p world_db= World Database:
 SET charset=UTF8
-SET port=3309
+SET port=3306
 SET dumppath=.\dump\
 SET mysqlpath=.\dep\mysql\
 SET devsql=.\main_db\world\
@@ -108,12 +108,10 @@ GOTO Begin
 
 :dumpworld
 CLS
-SET sqlname=JCDB_full_548.8_2016_10_23
-SET /p worlddb=   Enter name of your character DB:
 ECHO.
 IF NOT EXIST "%dumppath%" MKDIR %dumppath%
-ECHO Dumping %sqlname%.sql to %dumppath%
-%mysqlpath%\mysqldump -u%user% -p%pass% --routines --skip-comments --default-character-set=%charset% --result-file="%dumppath%\%sqlname%.sql" %worlddb%
+ECHO Dumping %world_db%.sql to %dumppath%
+%mysqlpath%\mysqldump -u%user% -p%pass% --routines --skip-comments --default-character-set=%charset% --result-file="%dumppath%\%world_db%.sql" %world_db%
 ECHO Done.
 PAUSE
 GOTO begin
